@@ -11,4 +11,7 @@ public class TodoContext : DbContext
     }
 
     public DbSet<Todo> Todos { get; set; } = null!;
+
+    public DbSet<Question> Questions { get; set; } = null!;
+    public DbSet<Option> Options { get; set; } = null!;
 }
