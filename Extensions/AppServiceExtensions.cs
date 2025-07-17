@@ -8,7 +8,6 @@ namespace ICEDT.API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
-            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ILevelService, LevelService>();
             services.AddScoped<IActivityService, ActivityService>();
 

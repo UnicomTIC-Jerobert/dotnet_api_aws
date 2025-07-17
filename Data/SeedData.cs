@@ -9,7 +9,7 @@ namespace ICEDT.API.Data
 {
     public static class SeedData
     {
-        public static async Task Initialize(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public static async Task Initialize(ApplicationDbContext context)
         {
             // Ensure database is created
             await context.Database.EnsureCreatedAsync();
@@ -128,24 +128,7 @@ namespace ICEDT.API.Data
                 await context.SaveChangesAsync();
             }
 
-            // Seed Users
-            if (!await userManager.Users.AnyAsync())
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = "admin",
-                    Email = "admin@example.com",
-                    EmailConfirmed = true,
-                    FirstName = "Admin",
-                    LastName = "User"
-                };
-
-                var result = await userManager.CreateAsync(user, "Password123");
-                if (!result.Succeeded)
-                {
-                    throw new InvalidOperationException($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            }
+            
         }
     }
 }

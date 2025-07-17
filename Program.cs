@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services using extension method
+builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 builder.Services.AddApplicationServices(builder.Configuration);
 
 // Configure logging
@@ -34,20 +36,24 @@ var app = builder.Build();
 //     });
 // }
 
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "ICEDT API v1");
-        options.RoutePrefix = "swagger"; // Access at /swagger
-    });
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ICEDT API v1");
+    options.RoutePrefix = "swagger"; // Access at /swagger
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Add authentication middleware
-app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+});
+
+
 app.UseWrapResponseMiddleware();
 
 app.MapControllerRoute(
@@ -62,7 +68,7 @@ using (var scope = app.Services.CreateScope())
     {
         var dbContext = services.GetRequiredService<ApplicationDbContext>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-        await SeedData.Initialize(dbContext, userManager);
+        await SeedData.Initialize(dbContext);
     }
     catch (Exception ex)
     {
