@@ -8,9 +8,10 @@ namespace ICEDT.API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ILevelService, LevelService>();
             services.AddScoped<IActivityService, ActivityService>();
-
+            services.AddScoped<IProgressService, ProgressService>();
             // AWS S3 client and MediaService registration
             services.AddAWSService<IAmazonS3>(); // Uses AWS SDK's credential provider chain
             services.AddScoped<IMediaService, MediaService>();
