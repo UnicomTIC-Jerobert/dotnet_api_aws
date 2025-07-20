@@ -39,5 +39,25 @@ namespace ICEDT.API.Repositories.Implementation
 
         public async Task<bool> SequenceOrderExistsAsync(int sequenceOrder) =>
             await _context.Levels.AnyAsync(l => l.SequenceOrder == sequenceOrder);
+
+        public Task<Lesson?> GetByIdAsync(int lessonId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Lesson> CreateAsync(Lesson lesson)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(Lesson lesson)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(int lessonId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
